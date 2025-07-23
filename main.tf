@@ -2,6 +2,9 @@ data "aws_availability_zones" "available_zones" {
   state = "available"
 }
 
+####################################################################################
+### VPC Module Configuration
+####################################################################################
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "~> 5.0"
@@ -10,6 +13,7 @@ module "vpc" {
   cidr = var.vpc_cidr_block
 
   azs = slice(data.aws_availability_zones.available_zones.names, 0, 3)
+
 
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets  = ["10.0.4.0/24", "10.0.5.0/24", "10.0.6.0/24"]
@@ -25,6 +29,9 @@ module "vpc" {
   }
 }
 
+####################################################################################
+###  EKS Cluster Module Configuration
+####################################################################################
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 20.0"
@@ -32,10 +39,7 @@ module "eks" {
   cluster_name    = var.eks_cluster_name
   cluster_version = "1.32"
 
-  # Optional
-  cluster_endpoint_public_access = true
-
-  # Optional: Adds the current caller identity as an administrator via cluster access entry
+  cluster_endpoint_public_access           = true
   enable_cluster_creator_admin_permissions = true
 
   eks_managed_node_groups = {

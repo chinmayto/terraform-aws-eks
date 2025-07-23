@@ -16,7 +16,6 @@ variable "vpc_cidr_block" {
   default     = "10.0.0.0/16"
 }
 
-
 variable "eks_cluster_name" {
   type        = string
   description = "Name of the EKS Cluster"
@@ -27,8 +26,4 @@ variable "environment" {
   type        = string
   description = "Environment for deployment"
   default     = "DEV"
-}
-
-variable "instance_key" {
-  default = "WorkshopKeyPair"
 }
