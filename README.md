@@ -228,5 +228,5 @@ In this post, we successfully set up a production-grade Kubernetes cluster on AW
 This is just the beginning. Kubernetes is a vast topic, and future posts will cover advanced concepts.
 
 ### References
-- Github Repo:
-- Terraform EKS modules:
+- Github Repo: https://github.com/chinmayto/terraform-aws-eks
+- Terraform EKS modules: https://registry.terraform.io/modules/terraform-aws-modules/eks/aws/18.14.0
