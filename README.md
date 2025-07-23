@@ -36,7 +36,7 @@ This setup ensures that your nodes are not directly exposed to the internet whil
 ### Step 1: Create the VPC
 We start by provisioning a robust VPC with 3 private and 3 public subnets across different AZs:
 
-```
+```terraform
 ####################################################################################
 ### VPC Module Configuration
 ####################################################################################
