@@ -7,7 +7,7 @@ data "aws_availability_zones" "available_zones" {
 ####################################################################################
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.0"
+  version = "~> 6.0"
 
   name = var.vpc_name
   cidr = var.vpc_cidr_block
@@ -34,10 +34,10 @@ module "vpc" {
 ####################################################################################
 module "eks" {
   source  = "terraform-aws-modules/eks/aws"
-  version = "~> 20.0"
+  version = "~> 21.0"
 
   cluster_name    = var.eks_cluster_name
-  cluster_version = "1.32"
+  cluster_version = "1.36"
 
   cluster_endpoint_public_access           = true
   enable_cluster_creator_admin_permissions = true
@@ -60,4 +60,13 @@ module "eks" {
     Terraform   = "true"
   }
 
+}
+
+
+resource "null_resource" "update_kubeconfig" {
+  provisioner "local-exec" {
+    command = "aws eks --region us-east-1 update-kubeconfig --name ${var.eks_cluster_name}"
+  }
+
+  depends_on = [module.eks]
 }
