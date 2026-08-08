@@ -36,10 +36,10 @@ module "eks" {
   source  = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
 
-  cluster_name    = var.eks_cluster_name
-  cluster_version = "1.36"
+  name               = var.eks_cluster_name
+  kubernetes_version = "1.36"
 
-  cluster_endpoint_public_access           = true
+  endpoint_public_access                   = true
   enable_cluster_creator_admin_permissions = true
 
   eks_managed_node_groups = {
